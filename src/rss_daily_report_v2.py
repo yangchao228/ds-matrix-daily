@@ -141,6 +141,7 @@ def generate_categorized_report(categorized_articles: Dict[str, List[Dict]], con
     report += f"- 信息源数量: {len(config.get('accounts', []))}\n"
     report += f"- 总文章数: {total_articles}\n"
     report += f"- 分类数量: {len(categorized_articles)}\n\n"
+    report += f"- 内容来源: 为您精选的{len(config.get('accounts', []))}个优质信息源，按主题智能聚合\n\n"
     
     # 按分类组织内容
     classifier = ContentClassifier()
