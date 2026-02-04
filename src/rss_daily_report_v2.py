@@ -263,13 +263,20 @@ def main():
             for entry in feed.entries:
                 try:
                     if entry.get('published'):
-                        pub_date = entry.get('published')
-                        if isinstance(pub_date, str):
-                            dt = datetime.fromisoformat(pub_date.replace('Z', '+00:00'))
-                        elif isinstance(pub_date, datetime):
-                            dt = pub_date.replace(tzinfo=pytz.UTC)
+                        # 使用feedparser解析的时间（entry.published_parsed）
+                        pub_parsed = entry.get('published_parsed')
+                        if pub_parsed:
+                            # 将时间元组转换为datetime对象
+                            dt = datetime(*pub_parsed[:6], tzinfo=pytz.UTC)
                         else:
-                            continue
+                            # 如果没有parsed时间，尝试直接解析published字符串
+                            pub_date = entry.get('published')
+                            if isinstance(pub_date, str):
+                                dt = datetime.fromisoformat(pub_date.replace('Z', '+00:00'))
+                            elif isinstance(pub_date, datetime):
+                                dt = pub_date.replace(tzinfo=pytz.UTC)
+                            else:
+                                continue
 
                         if dt >= cutoff_time:
                             filtered_entries.append(entry)
