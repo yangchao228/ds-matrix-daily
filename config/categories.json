@@ -1,0 +1,66 @@
+{
+  "categories": {
+    "AI & Technology": {
+      "keywords": ["AI", "人工智能", "machine learning", "deep learning", "neural network", "algorithm", "data science", "大数据", "云计算", "openai", "google ai", "nlp", "computer vision", "transformer", "llm", "large language model", "chatgpt", "gpt", "ai model", "neural scale"],
+      "emoji": "🤖",
+      "description": "人工智能与前沿技术"
+    },
+    "Business & Finance": {
+      "keywords": ["business", "finance", "economy", "stock", "market", "investment", "创业", "商业", "经济", "金融", "投资", "股市", "财报", "融资", "startup", "entrepreneur", "revenue", "earnings"],
+      "emoji": "💼",
+      "description": "商业财经与投资动态"
+    },
+    "Science & Research": {
+      "keywords": ["science", "research", "study", "scientific", "discovery", "researcher", "学术", "科研", "发现", "实验", "论文", "科学", "研究", "实验室", "innovation", "breakthrough"],
+      "emoji": "🔬",
+      "description": "科学研究与重大发现"
+    },
+    "Programming & Dev": {
+      "keywords": ["programming", "developer", "code", "software", "coding", "python", "javascript", "react", "vue", "开发", "编程", "软件", "程序员", "开源", "git", "framework", "library", "api", "backend", "frontend"],
+      "emoji": "💻",
+      "description": "编程开发与技术实践"
+    },
+    "Learning & Education": {
+      "keywords": ["learning", "education", "course", "tutorial", "study", "student", "teacher", "教育", "学习", "课程", "教程", "学生", "教师", "在线学习", "mooc", "edx", "coursera"],
+      "emoji": "📚",
+      "description": "学习教育与知识分享"
+    },
+    "Productivity": {
+      "keywords": ["productivity", "efficiency", "workflow", "time management", "tool", "productivity app", "效率", "生产力", "工具", "时间管理", "工作流", "todo", "notion", "obsidian"],
+      "emoji": "⚡",
+      "description": "效率工具与方法论"
+    },
+    "Design & UX": {
+      "keywords": ["design", "ux", "ui", "user experience", "graphic design", "interface", "设计", "用户体验", "界面", "视觉设计", "交互设计", "figma", "sketch", "adobe"],
+      "emoji": "🎨",
+      "description": "设计与用户体验"
+    },
+    "News & Politics": {
+      "keywords": ["news", "politics", "government", "policy", "election", "political", "新闻", "政治", "政府", "政策", "选举", "国际新闻", "world news"],
+      "emoji": "📰",
+      "description": "新闻政治与社会动态"
+    },
+    "Health & Wellness": {
+      "keywords": ["health", "wellness", "medical", "fitness", "nutrition", "medicine", "健康", "医疗", "健身", "营养", "养生", "心理健康", "wellbeing"],
+      "emoji": "💊",
+      "description": "健康医疗与生活方式"
+    },
+    "Entertainment": {
+      "keywords": ["entertainment", "movie", "film", "music", "game", "gaming", "tv", "celebrity", "娱乐", "电影", "音乐", "游戏", "电视剧", "明星", "streaming", "netflix", "hbo"],
+      "emoji": "🎬",
+      "description": "娱乐与文化生活"
+    }
+  },
+  "aggregation_rules": {
+    "similarity_threshold": 0.6,
+    "title_similarity_weight": 0.7,
+    "content_similarity_weight": 0.3,
+    "time_window_hours": 4
+  },
+  "summary_settings": {
+    "max_summary_length": 300,
+    "min_summary_length": 50,
+    "summary_style": "concise",
+    "language": "zh-CN"
+  }
+}
