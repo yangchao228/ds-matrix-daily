@@ -236,8 +236,9 @@ def main():
 
     # 获取所有账户的 RSS feeds
     accounts = config.get('accounts', [])
-    days_back = config.get('days_back', 1)
-    cutoff_time = datetime.now(pytz.UTC) - timedelta(days=days_back)
+    # 强制设置为最近1天（24小时）
+    hours_back = 24  # 最近24小时内
+    cutoff_time = datetime.now(pytz.UTC) - timedelta(hours=hours_back)
 
     print(f"\n日期: {date_str}")
     print(f"监控账户: {[acc.get('name', acc.get('handle', acc)) for acc in accounts]}")
@@ -313,10 +314,17 @@ def main():
         aggregator = ContentAggregator()
         aggregated_articles = aggregator.aggregate_articles(articles_with_summaries)
         
+        # 限制总文章数不超过20篇
+        # 按发布时间排序，取最新的20篇
+        sorted_articles = sorted(aggregated_articles, key=lambda x: x.get('published_at', datetime.min), reverse=True)[:20]
+        
+        print(f"\n📊 限制总数至最多20篇文章...")
+        print(f"  ✓ 最终处理 {len(sorted_articles)} 篇文章")
+        
         # 使用内容分类器对文章进行分类
         print("\n🏷️  分类文章...")
         classifier = ContentClassifier()
-        categorized_articles = classifier.categorize_articles(aggregated_articles)
+        categorized_articles = classifier.categorize_articles(sorted_articles)
         
         # 生成报告
         print("\n📊 生成分类聚合报告...")
