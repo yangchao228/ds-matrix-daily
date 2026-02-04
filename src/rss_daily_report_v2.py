@@ -274,9 +274,13 @@ def main():
                         if dt >= cutoff_time:
                             filtered_entries.append(entry)
                 except Exception as e:
-                    # 如果无法解析日期，保留
-                    filtered_entries.append(entry)
+                    # 如果无法解析日期，跳过该条目
+                    continue
 
+            # 限制每个源最多获取的文章数量，以确保多个源的平衡
+            max_entries_per_source = 10  # 每个源最多10篇文章
+            filtered_entries = filtered_entries[:max_entries_per_source]
+            
             feeds_data[name] = {
                 'feed': feed,
                 'entries': filtered_entries
@@ -315,17 +319,34 @@ def main():
         aggregator = ContentAggregator()
         aggregated_articles = aggregator.aggregate_articles(articles_with_summaries)
         
-        # 限制总文章数不超过20篇
-        # 按发布时间排序，取最新的20篇
-        sorted_articles = sorted(aggregated_articles, key=lambda x: x.get('published_at', datetime.min), reverse=True)[:20]
+        # 限制总文章数不超过20篇，同时确保来自不同源的平衡
+        # 按发布时间排序
+        all_sorted_articles = sorted(aggregated_articles, key=lambda x: x.get('published_at', datetime.min), reverse=True)
         
-        print(f"\n📊 限制总数至最多20篇文章...")
-        print(f"  ✓ 最终处理 {len(sorted_articles)} 篇文章")
+        # 从每个源中均衡选择文章，确保多样性
+        selected_articles = []
+        source_counts = {}
+        max_per_source = 5  # 每个源最多选择5篇文章
+        
+        for article in all_sorted_articles:
+            source = article.get('source', 'unknown')
+            current_count = source_counts.get(source, 0)
+            
+            if current_count < max_per_source and len(selected_articles) < 20:
+                selected_articles.append(article)
+                source_counts[source] = current_count + 1
+                
+                if len(selected_articles) >= 20:
+                    break
+        
+        print(f"\n📊 限制总数至最多20篇文章，确保来源多样性...")
+        print(f"  ✓ 最终处理 {len(selected_articles)} 篇文章")
+        print(f"  ✓ 来源分布: {dict(source_counts)}")
         
         # 使用内容分类器对文章进行分类
         print("\n🏷️  分类文章...")
         classifier = ContentClassifier()
-        categorized_articles = classifier.categorize_articles(sorted_articles)
+        categorized_articles = classifier.categorize_articles(selected_articles)
         
         # 生成报告
         print("\n📊 生成分类聚合报告...")
