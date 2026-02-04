@@ -112,20 +112,25 @@ class ContentClassifier:
         :param source: 来源
         :return: (分类名称, 置信度)
         """
-        text_to_analyze = f"{title} {content}".lower()
+        # 将文本转换为小写用于英文匹配，保留原始文本用于中文匹配
+        text_to_analyze_lower = f"{title} {content}".lower()
+        text_to_analyze = f"{title} {content}"
         
         # 基于关键词的初步分类
         scores = {}
         for category, info in self.categories.items():
             score = 0
             for keyword in info['keywords']:
-                # 计算关键词匹配得分
-                if keyword.lower() in text_to_analyze:
+                # 英文关键词匹配
+                if keyword.lower() in text_to_analyze_lower:
+                    score += 1
+                # 中文关键词匹配
+                if keyword in text_to_analyze:
                     score += 1
             
             # 标题中的关键词权重更高
             for keyword in info['keywords']:
-                if keyword.lower() in title.lower():
+                if keyword.lower() in title.lower() or keyword in title:
                     score += 1
             
             scores[category] = score

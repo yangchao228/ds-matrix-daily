@@ -80,7 +80,8 @@ class SummaryGenerator:
         import re
         
         # 简单的文本处理作为模拟
-        sentences = re.split(r'[.!?。！？]', content)
+        # 支持中文句号分割
+        sentences = re.split(r'[.!?。！？;；]', content)
         summary_parts = []
         current_length = 0
         
@@ -98,7 +99,9 @@ class SummaryGenerator:
                     summary_parts.append(sentence[:remaining])
                 break
         
-        summary = '。'.join(summary_parts).strip()
+        # 根据语言选择适当的连接符
+        separator = '。' if any('\u4e00' <= char <= '\u9fff' for char in content) else '. '
+        summary = separator.join(summary_parts).strip()
         
         # 确保不超出最大长度
         if len(summary) > self.config["max_summary_length"]:
