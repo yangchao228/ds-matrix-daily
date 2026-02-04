@@ -10,7 +10,8 @@ from datetime import datetime, timedelta
 import pytz
 
 # 添加src目录到路径
-sys.path.append(str(Path(__file__).parent / 'src'))
+src_path = Path(__file__).parent / 'src'
+sys.path.insert(0, str(src_path))
 
 from content_classifier import ContentClassifier
 from content_aggregator import ContentAggregator
