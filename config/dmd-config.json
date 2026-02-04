@@ -1,0 +1,74 @@
+{
+  "sourceType": "rss",
+  "rss": {
+    "baseUrl": "mixed",
+    "sources": {
+      "danielmiessler": "https://danielmiessler.com/feed.rss",
+      "steipete": "https://steipete.me/rss.xml"
+    },
+    "timeout": 30,
+    "userAgent": "Mozilla/5.0 (compatible; DMD-RSSDailyReport/2.0)"
+  },
+  "accounts": [
+    {
+      "name": "Daniel Miessler",
+      "rssUrl": "https://danielmiessler.com/feed.rss",
+      "handle": "DanielMiessler"
+    },
+    {
+      "name": "Peter Steinberger (steipete)",
+      "rssUrl": "https://steipete.me/rss.xml",
+      "handle": "steipete"
+    },
+    {
+      "name": "OpenClaw",
+      "note": "Website has no RSS feed - included for reference only",
+      "handle": "openclaw"
+    }
+  ],
+  "reportFormat": {
+    "title": "DMD 深度聚合日报 - {{date}}",
+    "version": "categorized_aggregation_v2",
+    "includeSections": {
+      "summary": true,
+      "postCount": true,
+      "categoryStats": true,
+      "posts": {
+        "includeOriginalText": false,
+        "includeSummary": true,
+        "includeLinks": true,
+        "includeTimestamp": true,
+        "includeAuthor": true,
+        "groupByCategory": true
+      }
+    },
+    "outputFormat": "categorized_markdown"
+  },
+  "classification": {
+    "enabled": true,
+    "configPath": "./config/categories.json",
+    "minConfidence": 0.3,
+    "fallbackCategory": "Other"
+  },
+  "aggregation": {
+    "enabled": true,
+    "similarityThreshold": 0.6,
+    "timeWindowHours": 4
+  },
+  "schedule": {
+    "enabled": true,
+    "time": "08:00",
+    "timezone": "Asia/Shanghai"
+  },
+  "email": {
+    "recipient": "yangchao228@gmail.com",
+    "subject": "DMD 深度聚合日报 - {{date}}",
+    "sender": "noreply@ds-matrix-daily.local",
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "address": "yangchao228@gmail.com",
+    "password": "uezc ewbt chws vqse"
+  },
+  "dataDir": "/root/.openclaw/workspace/twitter-data",
+  "days_back": 1
+}

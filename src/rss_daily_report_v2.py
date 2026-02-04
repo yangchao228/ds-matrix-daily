@@ -23,19 +23,31 @@ from summary_generator import SummaryGenerator
 
 
 # 配置文件路径
-CONFIG_PATH = Path("/root/.openclaw/workspace/twitter-daily-report-config.json")
+CONFIG_PATH = Path("../config/dmd-config.json")  # 优先使用项目内配置
+FALLBACK_CONFIG_PATH = Path("/root/.openclaw/workspace/twitter-daily-report-config.json")  # 回退到旧配置
 
 def load_config():
     """加载配置文件"""
-    try:
-        with open(CONFIG_PATH, 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        print("✗ 配置文件未找到")
-        return None
-    except json.JSONDecodeError as e:
-        print(f"✗ 配置文件格式错误: {e}")
-        return None
+    # 首先尝试项目内的配置文件
+    config_paths = [Path(__file__).parent / "../config/dmd-config.json", 
+                   Path("/root/.openclaw/workspace/twitter-daily-report-config.json")]
+    
+    for config_path in config_paths:
+        try:
+            if config_path.exists():
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                    print(f"✓ 使用配置文件: {config_path}")
+                    return config
+        except json.JSONDecodeError as e:
+            print(f"✗ 配置文件格式错误 {config_path}: {e}")
+            continue
+        except Exception as e:
+            print(f"✗ 读取配置文件失败 {config_path}: {e}")
+            continue
+    
+    print("✗ 所有配置文件均不可用")
+    return None
 
 def get_rss_feed(url, config):
     """
