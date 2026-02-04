@@ -153,7 +153,16 @@ def generate_categorized_report(categorized_articles: Dict[str, List[Dict]], con
         emoji = classifier.categories.get(category, {}).get('emoji', '📄')
         description = classifier.categories.get(category, {}).get('description', '')
         
-        report += f"# {emoji} {category}\n\n"
+        # 如果配置为中文，则使用中文分类名
+        lang = config.get('reportFormat', {}).get('language', 'en-US')
+        if lang.startswith('zh'):
+            # 从分类信息中获取中文名称
+            chinese_name = classifier.categories.get(category, {}).get('chinese_name', category)
+            display_category = chinese_name
+        else:
+            display_category = category
+        
+        report += f"# {emoji} {display_category}\n\n"
         if description:
             report += f"*{description}*\n\n"
         

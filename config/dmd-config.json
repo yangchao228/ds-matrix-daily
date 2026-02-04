@@ -29,6 +29,7 @@
   "reportFormat": {
     "title": "DMD 深度聚合日报 - {{date}}",
     "version": "categorized_aggregation_v2",
+    "language": "zh-CN",
     "includeSections": {
       "summary": true,
       "postCount": true,
@@ -48,7 +49,7 @@
     "enabled": true,
     "configPath": "./config/categories.json",
     "minConfidence": 0.3,
-    "fallbackCategory": "Other"
+    "fallbackCategory": "其他"
   },
   "aggregation": {
     "enabled": true,

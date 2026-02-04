@@ -39,52 +39,68 @@ class ContentClassifier:
             "AI & Technology": {
                 "keywords": ["AI", "人工智能", "machine learning", "deep learning", "neural network", "algorithm", "data science", "大数据", "云计算", "openai", "google ai", "nlp", "computer vision", "transformer", "llm", "large language model"],
                 "emoji": "🤖",
-                "description": "人工智能与技术发展"
+                "description": "人工智能与技术发展",
+                "chinese_name": "人工智能与技术"
             },
             "Business & Finance": {
                 "keywords": ["business", "finance", "economy", "stock", "market", "investment", "创业", "商业", "经济", "金融", "投资", "股市", "财报", "融资"],
                 "emoji": "💼",
-                "description": "商业财经与投资"
+                "description": "商业财经与投资",
+                "chinese_name": "商业财经"
             },
             "Science & Research": {
                 "keywords": ["science", "research", "study", "scientific", "discovery", "researcher", "学术", "科研", "发现", "实验", "论文", "科学", "研究"],
                 "emoji": "🔬",
-                "description": "科学研究与发现"
+                "description": "科学研究与发现",
+                "chinese_name": "科学研究"
             },
             "Programming & Dev": {
                 "keywords": ["programming", "developer", "code", "software", "coding", "python", "javascript", "react", "vue", "开发", "编程", "软件", "程序员", "开源", "git"],
                 "emoji": "💻",
-                "description": "编程开发与技术"
+                "description": "编程开发与技术",
+                "chinese_name": "编程开发"
             },
             "Learning & Education": {
                 "keywords": ["learning", "education", "course", "tutorial", "study", "student", "teacher", "教育", "学习", "课程", "教程", "学生", "教师", "在线学习"],
                 "emoji": "📚",
-                "description": "学习教育与知识分享"
+                "description": "学习教育与知识分享",
+                "chinese_name": "学习教育"
             },
             "Productivity": {
                 "keywords": ["productivity", "efficiency", "workflow", "time management", "tool", "productivity app", "效率", "生产力", "工具", "时间管理", "工作流"],
                 "emoji": "⚡",
-                "description": "效率工具与方法"
+                "description": "效率工具与方法",
+                "chinese_name": "效率工具"
             },
             "Design & UX": {
                 "keywords": ["design", "ux", "ui", "user experience", "graphic design", "interface", "设计", "用户体验", "界面", "视觉设计", "交互设计"],
                 "emoji": "🎨",
-                "description": "设计与用户体验"
+                "description": "设计与用户体验",
+                "chinese_name": "设计体验"
             },
             "News & Politics": {
                 "keywords": ["news", "politics", "government", "policy", "election", "political", "新闻", "政治", "政府", "政策", "选举", "国际新闻"],
                 "emoji": "📰",
-                "description": "新闻政治与社会"
+                "description": "新闻政治与社会",
+                "chinese_name": "新闻政治"
             },
             "Health & Wellness": {
                 "keywords": ["health", "wellness", "medical", "fitness", "nutrition", "medicine", "健康", "医疗", "健身", "营养", "养生", "心理健康"],
                 "emoji": "💊",
-                "description": "健康医疗与生活"
+                "description": "健康医疗与生活",
+                "chinese_name": "健康生活"
             },
             "Entertainment": {
                 "keywords": ["entertainment", "movie", "film", "music", "game", "gaming", "tv", "celebrity", "娱乐", "电影", "音乐", "游戏", "电视剧", "明星"],
                 "emoji": "🎬",
-                "description": "娱乐与文化"
+                "description": "娱乐与文化",
+                "chinese_name": "娱乐休闲"
+            },
+            "Other": {
+                "keywords": [],
+                "emoji": "📄",
+                "description": "其他类别",
+                "chinese_name": "其他"
             }
         }
     
@@ -193,6 +209,7 @@ class ContentClassifier:
             article_with_category['category'] = category
             article_with_category['confidence'] = confidence
             article_with_category['emoji'] = self.categories.get(category, {}).get('emoji', '📄')
+            article_with_category['chinese_name'] = self.categories.get(category, {}).get('chinese_name', category)
             
             categorized[category].append(article_with_category)
         
