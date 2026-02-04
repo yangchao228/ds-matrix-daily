@@ -1,0 +1,31 @@
+{
+  "apiKeys": {
+    "openai": "your_openai_api_key_here",
+    "twitter": {
+      "bearer_token": "your_twitter_bearer_token_here",
+      "api_key": "your_twitter_api_key_here",
+      "api_secret": "your_twitter_api_secret_here",
+      "access_token": "your_twitter_access_token_here",
+      "access_token_secret": "your_twitter_access_token_secret_here"
+    }
+  },
+  "rssSources": [
+    {
+      "name": "Example RSS Feed",
+      "url": "https://example.com/feed.xml",
+      "category": "tech"
+    }
+  ],
+  "dailyReportSettings": {
+    "outputDir": "./data/daily_reports/",
+    "summaryLength": "medium",
+    "includeCategories": ["tech", "ai", "news"],
+    "excludeCategories": ["ads", "promotions"],
+    "timeRangeHours": 24,
+    "language": "zh-CN"
+  },
+  "scheduler": {
+    "enabled": true,
+    "cronExpression": "0 8 * * *"  // 每天早上8点运行
+  }
+}
