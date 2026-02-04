@@ -237,8 +237,8 @@ def main():
 
     # 获取所有账户的 RSS feeds
     accounts = config.get('accounts', [])
-    # 设置为最近3天（72小时），确保有足够的内容
-    hours_back = 72  # 最近3天内
+    # 设置为最近30天（720小时），确保有足够的内容
+    hours_back = 720  # 最近30天内
     cutoff_time = datetime.now(pytz.UTC) - timedelta(hours=hours_back)
 
     print(f"\n日期: {date_str}")

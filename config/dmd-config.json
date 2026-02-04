@@ -71,5 +71,6 @@
     "password": "uezc ewbt chws vqse"
   },
   "dataDir": "/root/.openclaw/workspace/twitter-data",
-  "days_back": 1
+  "days_back": 30,
+  "hours_back": 720
 }
